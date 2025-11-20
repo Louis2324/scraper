@@ -40,4 +40,39 @@ public class Utils {
             return relative;
         }
     }
+
+    public static String formatDuration(long ms) {
+        if (ms < 1000) {
+            return ms + " ms";
+        }
+
+        long seconds = ms / 1000;
+        long minutes = seconds / 60;
+        long hours   = minutes / 60;
+
+        seconds %= 60;
+        minutes %= 60;
+
+        StringBuilder sb = new StringBuilder();
+
+        if (hours > 0) {
+            sb.append(hours).append(" hr");
+            if (hours > 1) sb.append("s");
+            if (minutes > 0 || seconds > 0) sb.append(" ");
+        }
+
+        if (minutes > 0) {
+            sb.append(minutes).append(" min");
+            if (minutes > 1) sb.append("s");
+            if (seconds > 0) sb.append(" ");
+        }
+
+        if (seconds > 0) {
+            sb.append(seconds).append(" sec");
+            if (seconds > 1) sb.append("s");
+        }
+
+        return sb.toString();
+    }
+
 }
