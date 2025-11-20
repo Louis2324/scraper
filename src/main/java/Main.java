@@ -48,19 +48,22 @@ public class Main {
                     FileDownloader.downloadBinary(link, saveFolder);
 
             if (info != null) {
-                db.insertLink(link, websiteId,info.elapsedTime, info.kilobytes);
+                db.insertLink(link, websiteId, info.elapsedTime, info.kilobytes);
                 totalKB += info.kilobytes;
+
+                System.out.println(" -> downloaded " + info.kilobytes + " KB in "
+                        + Utils.formatDuration(info.elapsedTime));
             }
         }
 
-
         long endTime = System.currentTimeMillis();
+        long totalTime = endTime - startTime;
 
         db.updateWebsite(websiteId, endTime, totalKB);
 
         System.out.println("\n=== DOWNLOAD COMPLETE ===");
         System.out.println("Website: " + domainName);
         System.out.println("Total KB downloaded: " + totalKB);
-        System.out.println("Total time: " + (endTime - startTime) + " ms");
+        System.out.println("Total time: " + Utils.formatDuration(totalTime));
     }
 }
