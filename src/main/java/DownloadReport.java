@@ -1,7 +1,7 @@
 public class DownloadReport {
 
     public static class ReportInfo {
-        public long kilobytes;
+        public double kilobytes;
         public long elapsedTime;
 
         public ReportInfo(long kb, long time) {
